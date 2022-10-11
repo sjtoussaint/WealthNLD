@@ -1,6 +1,7 @@
 # install.packages(pacman)
 
-pacman::p_load(tidyverse, readxl, stargazer, fixest, paletteer, tidyquant, ggformula)
+pacman::p_load(tidyverse, readxl, stargazer, fixest, paletteer, tidyquant, ggformula,
+               ggthemes)
 
 setwd(dirname(rstudioapi::getSourceEditorContext()$path))
 
@@ -230,10 +231,10 @@ ggsave("wealthcomposition_1880_2019_nni.pdf",
 ##### NL vs World ####
 
 comp_wi %>%
-  select(-`UK (Piketty-Zucman)`,
+  select(-`UK (Madsen)`,
          -`Germany (Piketty-Zucman)`) %>%
   rename(Germany = `Germany (Albers-Bartels-Schularick)`,
-         UK = `UK (Madsen)`) %>%
+         UK = `UK (Piketty-Zucman)`) %>%
   pivot_longer(-Year, names_to = "Country", values_to = "values")  %>%
   mutate(Category = ifelse(Country %in% c("Netherlands", "UK", "France"), 
                            "Major Colonial Power", "Other Countries")) %>%
